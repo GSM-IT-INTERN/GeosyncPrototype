@@ -60,8 +60,9 @@ export default function AuthLayout({ children, panelTitle = 'WELCOME', panelSubt
         </div>
 
         {/* Divider strip with aerial photo */}
-        <div className="auth-layout__divider">
+        <div draggable="true" className="auth-layout__divider">
           <div className="auth-layout__divider-label">DRAG RIGHT</div>
+        
         </div>
       </aside>
 
