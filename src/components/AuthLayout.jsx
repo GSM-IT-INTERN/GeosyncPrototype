@@ -32,7 +32,7 @@ export default function AuthLayout({ children, panelTitle = 'WELCOME', panelSubt
       {/* ── Left sidebar panel ── */}
       <aside className="auth-layout__sidebar">
         <div className="auth-layout__sidebar-inner">
-          <div className="auth-layout__logo">
+          <div className="auth-layout__logo auth-layout__logo-center">
             <GeoSyncLogo size="md" theme="dark" />
           </div>
 
