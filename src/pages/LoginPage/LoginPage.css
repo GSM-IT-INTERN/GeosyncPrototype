@@ -1,0 +1,70 @@
+/* ============================================
+   LoginPage
+   ============================================ */
+
+.login-form {
+  display: flex;
+  flex-direction: column;
+  gap: 24px;
+}
+
+/* Password row: field + forgot link positioned beneath */
+.login-form__password-row {
+  display: flex;
+  flex-direction: column;
+  gap: 0;
+  position: relative;
+}
+
+.login-form__forgot {
+  align-self: flex-end;
+  margin-top: 8px;
+  font-family: var(--font-ui);
+  font-size: 0.82rem;
+  font-weight: 600;
+  color: var(--color-navy);
+  text-decoration: none;
+  transition: color var(--transition-fast);
+}
+
+.login-form__forgot:hover {
+  color: var(--color-blue);
+  text-decoration: underline;
+}
+
+/* Submit area */
+.login-form__submit {
+  margin-top: 8px;
+  display: flex;
+  justify-content: center;
+}
+
+.login-form__submit .btn {
+  min-width: 220px;
+}
+
+/* Divider line */
+.login-form__divider {
+  height: 1px;
+  background: var(--color-gray-200);
+  margin: 4px 0;
+}
+
+/* Register link */
+.login-form__register {
+  text-align: center;
+  font-family: var(--font-ui);
+  font-size: 0.85rem;
+  color: var(--color-text-muted);
+}
+
+.login-form__register-link {
+  color: var(--color-link);
+  font-weight: 600;
+  transition: color var(--transition-fast);
+}
+
+.login-form__register-link:hover {
+  color: var(--color-blue);
+  text-decoration: underline;
+}

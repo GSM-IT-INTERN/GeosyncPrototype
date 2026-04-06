@@ -1,0 +1,106 @@
+/* ============================================
+   Button Component
+   ============================================ */
+
+.btn {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 8px;
+  font-family: var(--font-display);
+  font-weight: 700;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+  border-radius: var(--radius-xl);
+  border: none;
+  cursor: pointer;
+  transition:
+    background var(--transition-fast),
+    transform var(--transition-fast),
+    box-shadow var(--transition-fast),
+    opacity var(--transition-fast);
+  position: relative;
+  overflow: hidden;
+  white-space: nowrap;
+}
+
+.btn:active {
+  transform: scale(0.97);
+}
+
+.btn:disabled {
+  opacity: 0.6;
+  cursor: not-allowed;
+  transform: none;
+}
+
+/* ---- Sizes ---- */
+.btn--sm {
+  padding: 8px 20px;
+  font-size: 0.78rem;
+}
+
+.btn--md {
+  padding: 14px 32px;
+  font-size: 0.88rem;
+}
+
+.btn--lg {
+  padding: 17px 40px;
+  font-size: 0.95rem;
+}
+
+.btn--full {
+  width: 100%;
+}
+
+/* ---- Variants ---- */
+.btn--primary {
+  background: var(--color-sky);
+  color: var(--color-white);
+  box-shadow: 0 4px 16px rgba(91,164,207,0.35);
+}
+
+.btn--primary:hover:not(:disabled) {
+  background: var(--color-accent);
+  box-shadow: 0 6px 24px rgba(91,164,207,0.45);
+}
+
+.btn--secondary {
+  background: transparent;
+  color: var(--color-navy);
+  border: 1.5px solid var(--color-gray-300);
+}
+
+.btn--secondary:hover:not(:disabled) {
+  background: var(--color-gray-100);
+  border-color: var(--color-gray-400);
+}
+
+.btn--ghost {
+  background: transparent;
+  color: var(--color-blue);
+}
+
+.btn--ghost:hover:not(:disabled) {
+  background: var(--color-sky-pale);
+}
+
+/* ---- Loading spinner ---- */
+.btn--loading .btn__label {
+  opacity: 0.5;
+}
+
+.btn__spinner {
+  width: 16px;
+  height: 16px;
+  border: 2px solid rgba(255,255,255,0.4);
+  border-top-color: white;
+  border-radius: 50%;
+  animation: spin 0.7s linear infinite;
+  position: absolute;
+}
+
+@keyframes spin {
+  to { transform: rotate(360deg); }
+}

@@ -1,0 +1,43 @@
+/* ============================================
+   RegisterPage
+   ============================================ */
+
+.register-form {
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
+}
+
+.register-form__submit {
+  margin-top: 8px;
+  display: flex;
+  justify-content: center;
+}
+
+.register-form__submit .btn {
+  min-width: 220px;
+}
+
+.register-form__divider {
+  height: 1px;
+  background: var(--color-gray-200);
+  margin: 4px 0;
+}
+
+.register-form__login {
+  text-align: center;
+  font-family: var(--font-ui);
+  font-size: 0.85rem;
+  color: var(--color-text-muted);
+}
+
+.register-form__login-link {
+  color: var(--color-link);
+  font-weight: 600;
+  transition: color var(--transition-fast);
+}
+
+.register-form__login-link:hover {
+  color: var(--color-blue);
+  text-decoration: underline;
+}
