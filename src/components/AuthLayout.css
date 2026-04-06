@@ -29,7 +29,7 @@
 .auth-layout__sidebar {
   display: flex;
   flex-direction: row;
-  width: 420px;
+  width: 550px;
   flex-shrink: 0;
   background: var(--color-white);
   position: relative;
