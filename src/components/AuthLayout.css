@@ -323,6 +323,7 @@
   }
 
   .auth-layout__form-title {
+    font-weight: 800;
     font-size: 2.6rem;
   }
 }
