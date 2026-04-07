@@ -16,6 +16,7 @@
   flex-shrink: 0;
   background: var(--color-white);
   position: relative;
+  border-right: 1px solid #e0e0e0;
 }
 
 .auth-layout__sidebar-inner {
@@ -67,8 +68,8 @@
 }
 
 .auth-layout__feature-item--active {
-  border-color: var(--color-sky-light);
-  background: var(--color-white);
+  border-color: #63ABD2;
+  background: #F1F1F1;
   box-shadow: var(--shadow-sm);
 }
 
@@ -120,21 +121,19 @@
 
 /* ── DIVIDER STRIP ── */
 .auth-layout__divider {
-  width: 36px;
-  flex-shrink: 0;
-  background:
-    linear-gradient(
-      180deg,
-      var(--color-navy) 0%,
-      #1a3a6e 30%,
-      #2a6080 60%,
-      #1a3a5c 100%
-    );
+  position: absolute;
+  left: 550px;
+  top: 0;
+  bottom: 0;
+  width: 60px;
+  background-image: url('/blue.jpg');
+  background-color: #1a3a6e; /* Fallback color if image doesn't load */
+  background-size: cover;
+  background-repeat: no-repeat;
   display: flex;
   align-items: flex-end;
   justify-content: center;
   padding-bottom: 32px;
-  position: relative;
   overflow: hidden;
 }
 
@@ -174,6 +173,25 @@
   justify-content: center;
   padding: 48px;
   background: var(--color-white);
+  position: relative;
+  z-index: 2;
+}
+
+/* ── BLUE OVERLAY ── */
+.auth-layout__overlay {
+  position: absolute;
+  top: 0;
+  height: 100%;
+  background:
+    linear-gradient(
+      180deg,
+      var(--color-navy) 0%,
+      #1a3a6e 30%,
+      #2a6080 60%,
+      #1a3a5c 100%
+    );
+  z-index: 1;
+  pointer-events: none;
 }
 
 .auth-layout__form-wrapper {
