@@ -1,4 +1,4 @@
-import React from 'react'
+import React, { useState } from 'react'
 import GeoSyncLogo from './GeoSyncLogo.jsx'
 import './AuthLayout.css'
 
@@ -27,6 +27,27 @@ const FEATURES = [
 ]
 
 export default function AuthLayout({ children, panelTitle = 'WELCOME', panelSubtitle }) {
+  const [overlayWidth, setOverlayWidth] = useState(0);
+
+  const handleMouseDown = (e) => {
+    const startX = e.clientX;
+    const initialWidth = overlayWidth;
+
+    const handleMouseMove = (e) => {
+      const deltaX = e.clientX - startX;
+      const newWidth = Math.max(0, initialWidth + deltaX);
+      setOverlayWidth(newWidth);
+    };
+
+    const handleMouseUp = () => {
+      document.removeEventListener('mousemove', handleMouseMove);
+      document.removeEventListener('mouseup', handleMouseUp);
+    };
+
+    document.addEventListener('mousemove', handleMouseMove);
+    document.addEventListener('mouseup', handleMouseUp);
+  };
+
   return (
     <div className="auth-layout">
       {/* ── Left sidebar panel ── */}
@@ -60,8 +81,16 @@ export default function AuthLayout({ children, panelTitle = 'WELCOME', panelSubt
         </div>
 
         {/* Divider strip with aerial photo */}
-        <div draggable="true" className="auth-layout__divider">
-          <div className="auth-layout__divider-label">DRAG RIGHT</div>
+        <div 
+          className="auth-layout__divider" 
+          onMouseDown={handleMouseDown} 
+          style={{ 
+            width: overlayWidth || 60, 
+            cursor: 'ew-resize',
+            zIndex: overlayWidth > 60 ? 1 : 3
+          }}
+        >
+          {overlayWidth <= 60 && <div className="auth-layout__divider-label">DRAG RIGHT</div>}
         
         </div>
       </aside>
@@ -78,6 +107,14 @@ export default function AuthLayout({ children, panelTitle = 'WELCOME', panelSubt
           {children}
         </div>
       </main>
+
+      {/* Blue overlay */}
+      {overlayWidth > 0 && (
+        <div 
+          className="auth-layout__overlay" 
+          style={{ width: overlayWidth, left: 550 }}
+        />
+      )}
     </div>
   )
 }

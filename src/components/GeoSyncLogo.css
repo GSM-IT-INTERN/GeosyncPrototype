@@ -1,0 +1,126 @@
+.geosync-logo {
+  display: flex;
+  align-items: center;
+  gap: 0.625rem; /* 10px */
+}
+
+.geosync-logo img {
+  display: block;
+  width: auto;
+  height: auto;
+  max-width: 100%;
+}
+
+.geosync-logo span {
+  font-family: 'LEMON MILK Pro FTR', sans-serif;
+  font-weight: 700;
+  font-size: 50px;
+  letter-spacing: -0.02em;
+  line-height: 1;
+}
+
+/* Size variants */
+.geosync-logo.sm img {
+  height: 2.6rem;
+  width: 5.46rem;
+}
+
+.geosync-logo.sm span {
+  font-size: 2.86rem;
+}
+
+.geosync-logo.md img {
+  height: 3.6rem;
+  width: 7.2rem;
+}
+
+.geosync-logo.md span {
+  font-size: 3.7rem;
+}
+
+.geosync-logo.lg img {
+  height: 4.9rem;
+  width: 10.2rem;
+}
+
+.geosync-logo.lg span {
+  font-size: 5.1rem;
+}
+
+/* Theme variants */
+.geosync-logo.dark span {
+  color: #0d1b3e;
+}
+
+.geosync-logo.light span {
+  color: #ffffff;
+}
+
+/* Responsive adjustments */
+@media (max-width: 768px) {
+  .geosync-logo {
+    gap: 0.5rem; /* Reduce gap on mobile */
+  }
+
+  /* Scale down sizes for mobile */
+  .geosync-logo.sm img {
+    height: 1.95rem;
+    width: 4.1rem;
+  }
+
+  .geosync-logo.sm span {
+    font-size: 2.1rem;
+  }
+
+  .geosync-logo.md img {
+    height: 2.6rem;
+    width: 5.46rem;
+  }
+
+  .geosync-logo.md span {
+    font-size: 2.86rem;
+  }
+
+  .geosync-logo.lg img {
+    height: 3.25rem;
+    width: 6.8rem;
+  }
+
+  .geosync-logo.lg span {
+    font-size: 3.6rem;
+  }
+}
+
+@media (max-width: 480px) {
+  .geosync-logo {
+    gap: 0.375rem; /* Even smaller gap */
+  }
+
+  /* Further scale down for very small screens */
+  .geosync-logo.sm img {
+    height: 1.625rem;
+    width: 3.4rem;
+  }
+
+  .geosync-logo.sm span {
+    font-size: 1.8rem;
+  }
+
+  .geosync-logo.md img {
+    height: 2.3rem;
+    width: 4.8rem;
+  }
+
+  .geosync-logo.md span {
+    font-size: 2.5rem;
+  }
+
+  .geosync-logo.lg img {
+    height: 2.9rem;
+    width: 6.1rem;
+  }
+
+  .geosync-logo.lg span {
+    font-size: 3.2rem;
+  }
+}
