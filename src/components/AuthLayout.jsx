@@ -7,6 +7,7 @@ import greenBg from './assets/green.jpg'
 const SIDEBAR_WIDTH = 550
 const DIVIDER_MIN = 60
 
+// 👇 Add or remove images here anytime
 const DIVIDER_IMAGES = [blueBg, greenBg]
 
 const FEATURES = [
@@ -38,7 +39,6 @@ export default function AuthLayout({ children, panelTitle = 'WELCOME', panelSubt
   const [isAutoExpanded, setIsAutoExpanded] = useState(false)
   const [formBgOpacity, setFormBgOpacity] = useState(0)
   const [currentBgIndex, setCurrentBgIndex] = useState(0)
-  const [hasCycled, setHasCycled] = useState(false)
 
   const isDragging = useRef(false)
   const formWrapperRef = useRef(null)
@@ -47,7 +47,6 @@ export default function AuthLayout({ children, panelTitle = 'WELCOME', panelSubt
   useEffect(() => {
     const interval = setInterval(() => {
       setCurrentBgIndex(prev => (prev + 1) % DIVIDER_IMAGES.length)
-      setHasCycled(true)
     }, 2000)
     return () => clearInterval(interval)
   }, [])
@@ -103,19 +102,22 @@ export default function AuthLayout({ children, panelTitle = 'WELCOME', panelSubt
   }, [isAutoExpanded])
 
   const handleClose = () => {
-    setIsAutoExpanded(false)
-    setDividerWidth(DIVIDER_MIN)
-    setTimeout(() => {
-      setFormBgOpacity(0)
-    }, 100)
-  }
+  setIsAutoExpanded(false)
+  setDividerWidth(DIVIDER_MIN)
+  // Delay opacity reset to let the width transition finish first
+  setTimeout(() => {
+    setFormBgOpacity(0)
+  }, 100)
+}
 
-  const interpolateToWhite = (r, g, b) => {
+  const interpolateToWhite = (r, g, b, opacity = 1) => {
     const ri = Math.round(r + (255 - r) * formBgOpacity)
     const gi = Math.round(g + (255 - g) * formBgOpacity)
     const bi = Math.round(b + (255 - b) * formBgOpacity)
-    return `rgb(${ri}, ${gi}, ${bi})`
+    return `rgba(${ri}, ${gi}, ${bi}, ${opacity})`
   }
+
+  const navyToWhite = (opacity = 1) => interpolateToWhite(15, 17, 64, opacity)
 
   const formWrapperBg = `rgba(255, 255, 255, ${1 - formBgOpacity})`
   const formWrapperShadow = formBgOpacity > 0.5
@@ -160,55 +162,62 @@ export default function AuthLayout({ children, panelTitle = 'WELCOME', panelSubt
       <div
         className="auth-layout__divider"
         onMouseDown={handleMouseDown}
-        style={{
+        // style={{
+        //   width: dividerWidth,
+        //   cursor: isAutoExpanded ? 'default' : 'ew-resize',
+        //   borderRadius: isAutoExpanded ? '0' : '0 25px 25px 0',
+        //   transition: isAutoExpanded
+        //     ? 'width 0.5s cubic-bezier(0.25, 0.46, 0.45, 0.94), border-radius 0.4s ease'
+        //     : 'border-radius 0.4s ease',
+        // }}
+
+                style={{
           width: isAutoExpanded ? `calc(100vw - 530px)` : dividerWidth,
           cursor: isAutoExpanded ? 'default' : 'ew-resize',
           borderRadius: isAutoExpanded ? '0' : '0 25px 25px 0',
           transition: 'width 0.5s cubic-bezier(0.25, 0.46, 0.45, 0.94), border-radius 0.4s ease',
         }}
       >
-        {/* Base layer — zooms slowly while waiting to be replaced */}
-        <div
-          key={`prev-${prevBgIndex}`}
-          style={{
-            position: 'absolute',
-            inset: 0,
-            backgroundImage: `url(${DIVIDER_IMAGES[prevBgIndex]})`,
-            backgroundSize: 'cover',
-            backgroundPosition: 'center',
-            borderRadius: 'inherit',
-            pointerEvents: 'none',
-            zIndex: 1,
-            animation: 'bgZoomIn 1s ease forwards',
-          }}
-        />
+        {/* Base layer — zooms out as it gets replaced */}
+<div
+  key={`prev-${prevBgIndex}`}
+  style={{
+    position: 'absolute',
+    inset: 0,
+    backgroundImage: `url(${DIVIDER_IMAGES[prevBgIndex]})`,
+    backgroundSize: 'cover',
+    backgroundPosition: 'center',
+    borderRadius: 'inherit',
+    pointerEvents: 'none',
+    zIndex: 1,
+    animation: 'bgZoomIn 2s ease forwards',
+  }}
+/>
 
-        {/* Top layer — only renders after first cycle, fades in while zooming back */}
-        {hasCycled && (
-          <div
-            key={`curr-${currentBgIndex}`}
-            style={{
-              position: 'absolute',
-              inset: 0,
-              backgroundImage: `url(${DIVIDER_IMAGES[currentBgIndex]})`,
-              backgroundSize: 'cover',
-              backgroundPosition: 'center',
-              borderRadius: 'inherit',
-              pointerEvents: 'none',
-              zIndex: 2,
-              animation: 'bgFadeIn 2s ease forwards',
-            }}
-          />
-        )}
+{/* Top layer — fades in while zooming back to normal */}
+<div
+  key={`curr-${currentBgIndex}`}
+  style={{
+    position: 'absolute',
+    inset: 0,
+    backgroundImage: `url(${DIVIDER_IMAGES[currentBgIndex]})`,
+    backgroundSize: 'cover',
+    backgroundPosition: 'center',
+    borderRadius: 'inherit',
+    pointerEvents: 'none',
+    zIndex: 2,
+    animation: 'bgFadeIn 1.2s ease forwards',
+  }}
+/>
 
-        {!isAutoExpanded && (
-          <div
-            className="auth-layout__divider-label"
-            style={{ position: 'relative', zIndex: 3 }}
-          >
-            DRAG
-          </div>
-        )}
+                  {!isAutoExpanded && (
+            <div
+              className="auth-layout__divider-label"
+              style={{ position: 'relative', zIndex: 3 }}
+            >
+              DRAG RIGHT
+            </div>
+          )}
 
         {isAutoExpanded && (
           <div
@@ -239,7 +248,11 @@ export default function AuthLayout({ children, panelTitle = 'WELCOME', panelSubt
             <h1
               className="auth-layout__form-title"
               style={{
-                color: interpolateToWhite(15, 17, 64),
+                color: `rgb(
+                  ${Math.round(15 + (255 - 15) * formBgOpacity)},
+                  ${Math.round(17 + (255 - 17) * formBgOpacity)},
+                  ${Math.round(64 + (255 - 64) * formBgOpacity)}
+                )`,
                 transition: 'color 0.4s ease',
               }}
             >
