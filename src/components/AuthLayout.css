@@ -165,6 +165,7 @@
   writing-mode: vertical-rl;
   text-orientation: mixed;
   transform: rotate(180deg);
+  margin-left: 24px;
   font-family: 'LemonMilk' !important;
   font-weight: 700;
   font-size: 0.72rem;
@@ -299,4 +300,20 @@
   .auth-layout__main {
     padding: 24px 16px;
   }
+}
+
+@keyframes bgFadeIn {
+  from {
+    opacity: 0;
+    transform: scale(1.08);
+  }
+  to {
+    opacity: 1;
+    transform: scale(1);
+  }
+}
+
+@keyframes bgZoomIn {
+  from { transform: scale(1); }
+  to   { transform: scale(1.05); }
 }
