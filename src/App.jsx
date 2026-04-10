@@ -4,6 +4,7 @@ import LoginPage from './pages/LoginPage/LoginPage.jsx'
 import RegisterPage from './pages/RegisterPage/RegisterPage.jsx'
 import ForgotPasswordPage from './pages/ForgotPasswordPage/ForgotPasswordPage.jsx'
 import DashboardPage from './pages/DashboardPage/DashboardPage.jsx'
+import BankDetails from './pages/RegisterPage/BankDetails.jsx'
 
 export default function App() {
   return (
@@ -13,6 +14,7 @@ export default function App() {
       <Route path="/register" element={<RegisterPage />} />
       <Route path="/forgot-password" element={<ForgotPasswordPage />} />
       <Route path="/dashboard" element={<DashboardPage />} />
+      <Route path="/bankdetails" element={<BankDetails />} />
     </Routes>
   )
 }
